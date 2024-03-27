@@ -1,14 +1,14 @@
 export interface Report{
   id: number,
-  date: string,
-  team: string,
-  action: string,
-  jira_id: string,
-  jira_summary: number,
-  working_status: string,
-  ticket_status: string,
-  tester_1: string
-  tester_2: string
-  tester_3: string
-  jira_id_summary: string
+  date: any,
+  team: any,
+  action: any,
+  jira_id: any,
+  jira_summary: any,
+  working_status: any,
+  ticket_status: any,
+  tester_1: any,
+  tester_2: any,
+  tester_3: any,
+  jira_id_summary: any
 }

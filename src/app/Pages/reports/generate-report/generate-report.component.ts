@@ -3,6 +3,7 @@ import {Report} from "../report";
 import {ReportService} from "../../../Services/report.service";
 import jp from 'jsonpath';
 import {formatDate} from "@angular/common";
+import {SheetService} from "../../../Services/sheet.service";
 
 @Component({
   selector: 'app-generate-report',
@@ -10,7 +11,7 @@ import {formatDate} from "@angular/common";
   styleUrl: './generate-report.component.scss'
 })
 export class GenerateReportComponent {
-  reports!: Report[];
+  reports!: any;
   isLoading: boolean = false;
   loadingTitle!: string;
   subject: string = '';
@@ -158,7 +159,7 @@ export class GenerateReportComponent {
   days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   cc = "huy.quoc.tran@agest.vn; vien.do@agest.vn; tonyl@logigear.com; doug.wilson@logigear.com; canh.tran@agest.vn; tuong.vo@agest.vn; nhi.thuc.nguyen@agest.vn; tai.ngo@agest.vn; tai.le@agest.vn; duy.khuong.phan@agest.vn; thanh.dang@agest.vn; sang.le@agest.vn; vuong.bui@agest.vn; nhan.thi.tran@agest.vn; hung.ngo@agest.vn; hieu.ngoc.dang@agest.vn"
 
-  constructor(private reportService: ReportService) {
+  constructor(private reportService: ReportService, private service: SheetService) {
   }
 
   ngOnInit(): void {
@@ -171,24 +172,38 @@ export class GenerateReportComponent {
   getReports() {
     this.loadingTitle = "loading report ...";
     this.isLoading = true;
-    this.reportService.getReports().subscribe((data: any) => {
+    let today = formatDate(new Date(), 'dd-MMM-yyyy', "en-US")
+    this.service.listSheet().subscribe((data: any) => {
       this.reports = data;
-      // debugger
+      for (let i = 0; i <data.length ; i++) {
+        this.reports[i]['date'] = data[i][0];
+        this.reports[i]['team'] = data[i][1];
+        this.reports[i]['action'] = data[i][2];
+        this.reports[i]['jira_id'] = data[i][3];
+        this.reports[i]['jira_summary'] = data[i][4];
+        this.reports[i]['working_status'] = data[i][5];
+        this.reports[i]['ticket_status'] = data[i][6];
+        this.reports[i]['tester_1'] = data[i][7];
+        this.reports[i]['tester_2'] = data[i][8];
+        this.reports[i]['tester_3'] = data[i][9];
+        this.reports[i]['jira_id_summary'] = data[i][10];
+      }
+      console.log(this.reports);
       for (let i = 0; i <this.dataList.length ; i++) {
-        if (jp.query(data, `$[?(@.team== "${this.dataList[i].name}")]`)){
-          let testing_request_done = jp.query(data, `$[?(@.team== "${this.dataList[i].name}" && @.action== "Testing request" && @.working_status== "Done")]`);
+        if (jp.query(this.reports, `$[?(@.team== "${this.dataList[i].name}" && @.date== "${today}")]`)){
+          let testing_request_done = jp.query(this.reports, `$[?(@.team== "${this.dataList[i].name}" && @.date== "${today}" && @.action== "Testing request" && @.working_status== "Done")]`);
           if (testing_request_done) {
             this.dataList[i]['testing_request_done']['data'] = testing_request_done;
             this.dataList[i]['testing_request_done']['no'] = testing_request_done.length;
           }
-          let testing_request_inprogress = jp.query(data, `$[?(@.team== "${this.dataList[i].name}" && @.action== "Testing request" && @.working_status== "In-progress")]`);
+          let testing_request_inprogress = jp.query(this.reports, `$[?(@.team== "${this.dataList[i].name}" && @.date== "${today}" && @.action== "Testing request" && @.working_status== "In-progress")]`);
 
           if (testing_request_inprogress) {
             this.dataList[i]['testing_request_inprogress']['data'] = testing_request_inprogress;
             this.dataList[i]['testing_request_inprogress']['no'] = testing_request_inprogress.length;
           }
 
-          let bug_found = jp.query(data, `$[?(@.team== "${this.dataList[i].name}" && @.action== "Bug found")]`);
+          let bug_found = jp.query(this.reports, `$[?(@.team== "${this.dataList[i].name}" && @.date== "${today}" && @.action== "Bug found")]`);
 
           if (bug_found) {
             this.dataList[i]['bug_found']['data'] = bug_found;
@@ -196,7 +211,6 @@ export class GenerateReportComponent {
           }
         }
       }
-      console.log(this.dataList);
       this.isLoading = false;
     });
   }

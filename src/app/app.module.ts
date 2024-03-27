@@ -27,7 +27,7 @@ import {GenerateReportComponent} from "./Pages/reports/generate-report/generate-
     SignupComponent,
     FooterComponent,
     ShowComponent,
-    GenerateReportComponent
+    GenerateReportComponent,
   ],
   imports: [
     BrowserModule,

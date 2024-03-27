@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Report} from "../report";
 import {ReportService} from "../../../Services/report.service";
 import jp from 'jsonpath';
+import {formatDate} from "@angular/common";
 
 @Component({
   selector: 'app-generate-report',
@@ -12,6 +13,7 @@ export class GenerateReportComponent {
   reports!: Report[];
   isLoading: boolean = false;
   loadingTitle!: string;
+  subject: string = '';
   dataList: any = [
     {
       "name": "1 - Initial Configuration",
@@ -152,13 +154,17 @@ export class GenerateReportComponent {
       }
     }
   ]
-
+  days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  cc = "huy.quoc.tran@agest.vn; vien.do@agest.vn; tonyl@logigear.com; doug.wilson@logigear.com; canh.tran@agest.vn; tuong.vo@agest.vn; nhi.thuc.nguyen@agest.vn; tai.ngo@agest.vn; tai.le@agest.vn; duy.khuong.phan@agest.vn; thanh.dang@agest.vn; sang.le@agest.vn; vuong.bui@agest.vn; nhan.thi.tran@agest.vn; hung.ngo@agest.vn; hieu.ngoc.dang@agest.vn"
 
   constructor(private reportService: ReportService) {
   }
 
   ngOnInit(): void {
     this.getReports();
+    let date = new Date();
+    this.subject = "[AGEST][SONOS] Daily Status Report - " + this.days[date.getDay()] + ", " + formatDate(date, 'MMMM dd, yyyy', "en-US");
+    console.log(this.subject);
   }
 
   getReports() {

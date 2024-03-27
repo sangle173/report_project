@@ -8,8 +8,8 @@ import {ShowComponent} from "./Pages/reports/show/show.component";
 import {GenerateReportComponent} from "./Pages/reports/generate-report/generate-report.component";
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full', title: 'Angular CRUD application'  }, // Default redirection to 'home'
+  { path: 'home', component: GenerateReportComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full', title: 'Report'  }, // Default redirection to 'home'
   { path: 'signup', component: SignupComponent, title: 'Register'  },
   { path: 'profile/:id', component: ProfileComponent, title: 'Edit employee' },
   { path: 'user-list', component: UserListComponent , title: 'User List'},

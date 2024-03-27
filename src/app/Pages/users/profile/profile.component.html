@@ -1,0 +1,539 @@
+<!--&lt;!&ndash;<div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="container mt-5">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="card">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="card-header">&ndash;&gt;-->
+<!--&lt;!&ndash;                <h4>Profile</h4>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="card-body">&ndash;&gt;-->
+<!--&lt;!&ndash;                <div *ngIf="isLoading; else elseForm">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <app-loading :title="loadingTitle"></app-loading>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                <ng-template #elseForm>&ndash;&gt;-->
+<!--&lt;!&ndash;                &ndash;&gt;-->
+<!--&lt;!&ndash;                <form [formGroup]="userForm" (ngSubmit)="updateUser()">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="mb-3">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <label>Name</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <input type="text" formControlName="name" class="form-control" />&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div *ngIf="userForm.get('name')?.hasError('required') && userForm.get('name')?.touched"&ndash;&gt;-->
+<!--&lt;!&ndash;                            class="text-danger">&ndash;&gt;-->
+<!--&lt;!&ndash;                            Name is required.&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="mb-3">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <label>Email</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <input type="text" formControlName="email" class="form-control" />&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div *ngIf="userForm.get('email')?.hasError('required') && userForm.get('email')?.touched"&ndash;&gt;-->
+<!--&lt;!&ndash;                            class="text-danger">&ndash;&gt;-->
+<!--&lt;!&ndash;                            Email is required.&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    &lt;!&ndash; <div class="mb-3">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <label>Hiring Date</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <input type="text" formControlName="hiringDate" class="form-control" bsDatepicker id="datetimePicker"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div *ngIf="userForm.get('hiringDate')?.hasError('required') && userForm.get('hiringDate')?.touched"&ndash;&gt;-->
+<!--&lt;!&ndash;                            class="text-danger">&ndash;&gt;-->
+<!--&lt;!&ndash;                            Hiring Date is required.&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div> &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="mb-3">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <label>Phone</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <input type="text" formControlName="phone" class="form-control" />&ndash;&gt;-->
+<!--&lt;!&ndash;                        &ndash;&gt;-->
+<!--&lt;!&ndash;                        <div *ngIf="(userForm.get('phone')?.hasError('required') || userForm.get('phone')?.hasError('invalidInteg')) && userForm.get('phone')?.touched"&ndash;&gt;-->
+<!--&lt;!&ndash;                            class="text-danger">&ndash;&gt;-->
+<!--&lt;!&ndash;                            Phone must be a valid number.&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="mb-3">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <label>Country</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <input type="text" formControlName="country" class="form-control" />&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div *ngIf="userForm.get('country')?.hasError('required') && userForm.get('country')?.touched"&ndash;&gt;-->
+<!--&lt;!&ndash;                            class="text-danger">&ndash;&gt;-->
+<!--&lt;!&ndash;                            Country is required.&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="mb-3">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <label>Address</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <input type="text" formControlName="address" class="form-control" />&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div *ngIf="userForm.get('address')?.hasError('required') && userForm.get('address')?.touched"&ndash;&gt;-->
+<!--&lt;!&ndash;                            class="text-danger">&ndash;&gt;-->
+<!--&lt;!&ndash;                            Address is required.&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="mb-3">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <label>Gender</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <input type="text" formControlName="gender" class="form-control" />&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div *ngIf="userForm.get('gender')?.hasError('required') && userForm.get('gender')?.touched"&ndash;&gt;-->
+<!--&lt;!&ndash;                            class="text-danger">&ndash;&gt;-->
+<!--&lt;!&ndash;                            Gender is required.&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="mb-3">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <button type="submit" class="btn btn-primary">Update</button>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                </form>&ndash;&gt;-->
+<!--&lt;!&ndash;                </ng-template>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--<div id="divExp" class="divExp"><div id="divPrtBk" style="opacity: 1;"></div><div id="divExpHdr"><img src="14.3.513.0/themes/resources/clear1x1.gif" class="csimg csimgbg sprites-hdiv-l-png" id="divDividerLeft"><img src="14.3.513.0/themes/resources/clear1x1.gif" class="csimg csimgbg sprites-hdiv-r-png" id="divDividerRight"><div id="divDividerTile"></div><div id="divSn" class="divSn divTx" style="right: 194px;"><span id="spnFrom" class="rwRRO" ondblclick="_e(this,this.getAttribute(&quot;_e_ondblclick&quot;), event)" _e_ondblclick="onDblClkReadRcp(event);" onclick="_e(this,this.getAttribute(&quot;_e_onclick&quot;), event)" _e_onclick="onClkRcp(event);" oncontextmenu="_e(this,this.getAttribute(&quot;_e_oncontextmenu&quot;), event)" _e_oncontextmenu="onRwCm(event);" _fjnk="1" _dn="Hieu Dang - 48262" _rt="EX" _em="/o=AGEST Vietnam/ou=Exchange Administrative Group (FYDIBOHF23SPDLT)/cn=Recipients/cn=Hieu Dang Ngoc20a" _ao="2" title="hieu.ngoc.dang@agest.vn">Hieu Dang - 48262</span></div><div id="divActionIcons" style="right: 74px;"><img src="14.3.513.0/themes/resources/clear1x1.gif" class="csimg csimgbg sprites-replyActive-png" id="imgReplyIcon" title="Reply" style="left: 0px;"><img src="14.3.513.0/themes/resources/clear1x1.gif" class="csimg csimgbg sprites-replyAllActive-png" id="imgReplyAllIcon" title="Reply All"><img src="14.3.513.0/themes/resources/clear1x1.gif" class="csimg csimgbg sprites-forwardActive-png" id="imgForwardIcon" title="Forward" style="right: 0px;"></div><div id="divInfIc" style="width: 0px; right: 194px;"></div><div id="divActions" style="width: 54px;"><span id="spnActions">Actions</span><img src="14.3.513.0/themes/resources/clear1x1.gif" class="csimg csimgbg sprites-dwn-png"></div></div><div id="divSelDisplay"><div id="divBrTxtOnExpansion"></div><div id="divRws"><div id="divWellTo" class="roWellRow"><div id="divToL" class="roWellLabel pvwLabel" style="width: 15px;"><span class="nowrap">To:</span></div><div class="roWellWrap"><div id="divFieldTo" class="wellField"><div id="divFH">M</div><div id="divTo" class="rwW rwWRO">&nbsp;<span id="spnR" oncontextmenu="_e(this,this.getAttribute(&quot;_e_oncontextmenu&quot;), event)" _e_oncontextmenu="onRwCm(event);" ondblclick="_e(this,this.getAttribute(&quot;_e_ondblclick&quot;), event)" _e_ondblclick="onDblClkReadRcp(event);" onclick="_e(this,this.getAttribute(&quot;_e_onclick&quot;), event)" _e_onclick="onClkRcp(event);" class="rwRRO" _ao="3" _rf="0" _rt="SMTP" _em="roger.bischoff@sonos.com" title="roger.bischoff@sonos.com" _sa="roger.bischoff@sonos.com" _dn="roger.bischoff@sonos.com">roger.bischoff@sonos.com</span>&nbsp;</div></div></div></div><div id="divWellCc" class="roWellRow"><div id="divCcL" class="roWellLabel pvwLabel" style="width: 15px;"><span class="nowrap">Cc:</span></div><div class="roWellWrap"><div id="divFieldCc" class="wellField"><div id="divFH">M</div><div id="divCc" class="rwW rwWRO">&nbsp;<span id="spnR" oncontextmenu="_e(this,this.getAttribute(&quot;_e_oncontextmenu&quot;), event)" _e_oncontextmenu="onRwCm(event);" ondblclick="_e(this,this.getAttribute(&quot;_e_ondblclick&quot;), event)" _e_ondblclick="onDblClkReadRcp(event);" onclick="_e(this,this.getAttribute(&quot;_e_onclick&quot;), event)" _e_onclick="onClkRcp(event);" class="rwRRO" _ao="2" _rf="0" _rt="EX" _em="/O=AGEST VIETNAM/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=Tran Quoc Huy03f" title="huy.quoc.tran@agest.vn">Huy Tran</span>‎; <span id="spnR" oncontextmenu="_e(this,this.getAttribute(&quot;_e_oncontextmenu&quot;), event)" _e_oncontextmenu="onRwCm(event);" ondblclick="_e(this,this.getAttribute(&quot;_e_ondblclick&quot;), event)" _e_ondblclick="onDblClkReadRcp(event);" onclick="_e(this,this.getAttribute(&quot;_e_onclick&quot;), event)" _e_onclick="onClkRcp(event);" class="rwRRO" _ao="2" _rf="0" _rt="EX" _em="/O=AGEST VIETNAM/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=Do The Vienec9" title="vien.do@agest.vn">Vien Do</span>‎; <span id="spnR" oncontextmenu="_e(this,this.getAttribute(&quot;_e_oncontextmenu&quot;), event)" _e_oncontextmenu="onRwCm(event);" ondblclick="_e(this,this.getAttribute(&quot;_e_ondblclick&quot;), event)" _e_ondblclick="onDblClkReadRcp(event);" onclick="_e(this,this.getAttribute(&quot;_e_onclick&quot;), event)" _e_onclick="onClkRcp(event);" class="rwRRO" _ao="2" _rf="0" _rt="EX" _em="/O=AGEST VIETNAM/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=Tony Luu20c" title="tonyl@logigear.com">Tony Luu</span>‎; <span id="spnR" oncontextmenu="_e(this,this.getAttribute(&quot;_e_oncontextmenu&quot;), event)" _e_oncontextmenu="onRwCm(event);" ondblclick="_e(this,this.getAttribute(&quot;_e_ondblclick&quot;), event)" _e_ondblclick="onDblClkReadRcp(event);" onclick="_e(this,this.getAttribute(&quot;_e_onclick&quot;), event)" _e_onclick="onClkRcp(event);" class="rwRRO" _ao="2" _rf="0" _rt="EX" _em="/O=AGEST VIETNAM/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=Doug Wilson178" title="doug.wilson@logigear.com">Doug Wilson</span>‎; <span id="spnR" oncontextmenu="_e(this,this.getAttribute(&quot;_e_oncontextmenu&quot;), event)" _e_oncontextmenu="onRwCm(event);" ondblclick="_e(this,this.getAttribute(&quot;_e_ondblclick&quot;), event)" _e_ondblclick="onDblClkReadRcp(event);" onclick="_e(this,this.getAttribute(&quot;_e_onclick&quot;), event)" _e_onclick="onClkRcp(event);" class="rwRRO" _ao="2" _rf="0" _rt="EX" _em="/O=AGEST VIETNAM/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=Canh Tran Ngoc17f" title="canh.tran@agest.vn">Canh Tran</span>‎; <span id="spnR" oncontextmenu="_e(this,this.getAttribute(&quot;_e_oncontextmenu&quot;), event)" _e_oncontextmenu="onRwCm(event);" ondblclick="_e(this,this.getAttribute(&quot;_e_ondblclick&quot;), event)" _e_ondblclick="onDblClkReadRcp(event);" onclick="_e(this,this.getAttribute(&quot;_e_onclick&quot;), event)" _e_onclick="onClkRcp(event);" class="rwRRO" _ao="2" _rf="0" _rt="EX" _em="/O=AGEST VIETNAM/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=Vo Dang Tuong441" title="tuong.vo@agest.vn">Vo Dang</span>‎; <span id="spnR" oncontextmenu="_e(this,this.getAttribute(&quot;_e_oncontextmenu&quot;), event)" _e_oncontextmenu="onRwCm(event);" ondblclick="_e(this,this.getAttribute(&quot;_e_ondblclick&quot;), event)" _e_ondblclick="onDblClkReadRcp(event);" onclick="_e(this,this.getAttribute(&quot;_e_onclick&quot;), event)" _e_onclick="onClkRcp(event);" class="rwRRO" _ao="2" _rf="0" _rt="EX" _em="/O=AGEST VIETNAM/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=Nhi Nguyen Thi Thucf9a" title="nhi.thuc.nguyen@agest.vn">Nhi Nguyen - 48297</span>‎; <span id="spnR" oncontextmenu="_e(this,this.getAttribute(&quot;_e_oncontextmenu&quot;), event)" _e_oncontextmenu="onRwCm(event);" ondblclick="_e(this,this.getAttribute(&quot;_e_ondblclick&quot;), event)" _e_ondblclick="onDblClkReadRcp(event);" onclick="_e(this,this.getAttribute(&quot;_e_onclick&quot;), event)" _e_onclick="onClkRcp(event);" class="rwRRO" _ao="2" _rf="0" _rt="EX" _em="/O=AGEST VIETNAM/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=Tai Ngo Duc6fb" title="tai.ngo@agest.vn">Tai Ngo</span>‎; <span id="spnR" oncontextmenu="_e(this,this.getAttribute(&quot;_e_oncontextmenu&quot;), event)" _e_oncontextmenu="onRwCm(event);" ondblclick="_e(this,this.getAttribute(&quot;_e_ondblclick&quot;), event)" _e_ondblclick="onDblClkReadRcp(event);" onclick="_e(this,this.getAttribute(&quot;_e_onclick&quot;), event)" _e_onclick="onClkRcp(event);" class="rwRRO" _ao="2" _rf="0" _rt="EX" _em="/O=AGEST VIETNAM/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=Tai Le Than Chic10" title="tai.le@agest.vn">Tai Le</span>‎; <span id="spnR" oncontextmenu="_e(this,this.getAttribute(&quot;_e_oncontextmenu&quot;), event)" _e_oncontextmenu="onRwCm(event);" ondblclick="_e(this,this.getAttribute(&quot;_e_ondblclick&quot;), event)" _e_ondblclick="onDblClkReadRcp(event);" onclick="_e(this,this.getAttribute(&quot;_e_onclick&quot;), event)" _e_onclick="onClkRcp(event);" class="rwRRO" _ao="2" _rf="0" _rt="EX" _em="/O=AGEST VIETNAM/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=Duy Phan Khuong062" title="duy.khuong.phan@agest.vn">Duy Phan - 48302</span>‎; <span id="spnR" oncontextmenu="_e(this,this.getAttribute(&quot;_e_oncontextmenu&quot;), event)" _e_oncontextmenu="onRwCm(event);" ondblclick="_e(this,this.getAttribute(&quot;_e_ondblclick&quot;), event)" _e_ondblclick="onDblClkReadRcp(event);" onclick="_e(this,this.getAttribute(&quot;_e_onclick&quot;), event)" _e_onclick="onClkRcp(event);" class="rwRRO" _ao="2" _rf="0" _rt="EX" _em="/O=AGEST VIETNAM/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=Thanh Dang Ngocd99" title="thanh.dang@agest.vn">Thanh Dang</span>‎; <span id="spnR" oncontextmenu="_e(this,this.getAttribute(&quot;_e_oncontextmenu&quot;), event)" _e_oncontextmenu="onRwCm(event);" ondblclick="_e(this,this.getAttribute(&quot;_e_ondblclick&quot;), event)" _e_ondblclick="onDblClkReadRcp(event);" onclick="_e(this,this.getAttribute(&quot;_e_onclick&quot;), event)" _e_onclick="onClkRcp(event);" class="rwRRO" _ao="2" _rf="0" _rt="EX" _em="/O=AGEST VIETNAM/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=Sang Le Duceda" title="sang.le@agest.vn">Sang Le</span>‎; <span id="spnR" oncontextmenu="_e(this,this.getAttribute(&quot;_e_oncontextmenu&quot;), event)" _e_oncontextmenu="onRwCm(event);" ondblclick="_e(this,this.getAttribute(&quot;_e_ondblclick&quot;), event)" _e_ondblclick="onDblClkReadRcp(event);" onclick="_e(this,this.getAttribute(&quot;_e_onclick&quot;), event)" _e_onclick="onClkRcp(event);" class="rwRRO" _ao="2" _rf="0" _rt="EX" _em="/O=AGEST VIETNAM/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=Vuong Bui Thi Nu59a" title="vuong.bui@agest.vn">Vuong Bui</span>‎; <span id="spnR" oncontextmenu="_e(this,this.getAttribute(&quot;_e_oncontextmenu&quot;), event)" _e_oncontextmenu="onRwCm(event);" ondblclick="_e(this,this.getAttribute(&quot;_e_ondblclick&quot;), event)" _e_ondblclick="onDblClkReadRcp(event);" onclick="_e(this,this.getAttribute(&quot;_e_onclick&quot;), event)" _e_onclick="onClkRcp(event);" class="rwRRO" _ao="2" _rf="0" _rt="EX" _em="/O=AGEST VIETNAM/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=Ngo Manh Hung4d5" title="hung.ngo@agest.vn">Hung Ngo - 48166</span>‎; <span id="spnR" oncontextmenu="_e(this,this.getAttribute(&quot;_e_oncontextmenu&quot;), event)" _e_oncontextmenu="onRwCm(event);" ondblclick="_e(this,this.getAttribute(&quot;_e_ondblclick&quot;), event)" _e_ondblclick="onDblClkReadRcp(event);" onclick="_e(this,this.getAttribute(&quot;_e_onclick&quot;), event)" _e_onclick="onClkRcp(event);" class="rwRRO" _ao="2" _rf="0" _rt="EX" _em="/O=AGEST VIETNAM/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=Tran Thi Nhan598" title="nhan.thi.tran@agest.vn">Nhan Tran - 48303</span>&nbsp;</div></div></div></div></div><div id="divExpSubHdr"><div id="divSubFs"><div id="divFs"><div class="divTx">&nbsp;</div></div></div><div id="divSubSent"><span id="spnSent">Monday, March 25, 2024 5:29 PM</span></div></div><div id="divInfobar" class="infobar" style="display:none"><div id="divInfobarColor" class=""></div><div id="divIB"><div id="divErr" style="display:none" itype="10"><div id="divEIB"><table cellpadding="0" cellspacing="0"><tbody><tr><td id="tdIcon" valign="top"><img src="14.3.513.0/themes/resources/clear1x1.gif" class="csimg csimgbg sprites-warn-png"></td><td id="tdMsg" style="width:100%;"></td><td id="tdEISnd" style="display:none;vertical-align:top;"><img src="14.3.513.0/themes/resources/clear1x1.gif" class="csimg csimgbg sprites-send-gif" id="imgEISnd" style="cursor:hand" onclick="_e(this,this.getAttribute(&quot;_e_onclick&quot;), event)" _e_onclick="onClkEISnd();" _msgsent="Report Sent" title="Send Error Report"></td><td id="tdEICpy" style="display:none;vertical-align:top;"><img src="14.3.513.0/themes/resources/clear1x1.gif" class="csimg csimgbg sprites-copy-gif" id="imgEICpy" style="cursor:hand" onclick="_e(this,this.getAttribute(&quot;_e_onclick&quot;), event)" _e_onclick="onClkEICpy();" title="Copy error details to clipboard"></td></tr></tbody></table></div></div></div></div></div><div id="divBdy" class="bdyItmPrt" _fallwcm="1"><div>-->
+<!--  <div><span lang="en-US">-->
+<!--<div>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a name="_Hlk155304048">Hi Roger,</a></span></font></div>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;">Below is our status report for today. Please review and let us know if you have any comments or questions.</span></font></div>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font size="4"><span style="font-size:14pt;"><b>&nbsp;</b></span></font></span></font></div>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font size="4"><span style="font-size:14pt;"><b>Summary:</b></span></font></span></font></div>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><b>&nbsp;</b></span></font></div>-->
+<!--<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">-->
+<!--<tbody><tr height="25" style="height:15pt;">-->
+<!--<td width="236" valign="bottom" nowrap="" style="width:141.75pt;height:15pt;background-color:#DCE6F1;padding:0 5.4pt;">-->
+<!--<span style="background-color:#DCE6F1;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Initial Configuration</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="167" valign="bottom" nowrap="" style="width:100.25pt;height:15pt;background-color:#DCE6F1;padding:0 5.4pt;">-->
+<!--<span style="background-color:#DCE6F1;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Testing request</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="133" valign="bottom" nowrap="" style="width:80pt;height:15pt;background-color:#DCE6F1;padding:0 5.4pt;">-->
+<!--<span style="background-color:#DCE6F1;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Done</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="80" nowrap="" style="width:48pt;height:15pt;background-color:#DCE6F1;padding:0 5.4pt;">-->
+<!--<span style="background-color:#DCE6F1;">-->
+<!--<div align="center" style="text-align:center;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>3</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--</tr>-->
+<!--<tr height="25" style="height:15pt;">-->
+<!--<td width="236" valign="bottom" nowrap="" style="width:141.75pt;height:15pt;background-color:#DCE6F1;padding:0 5.4pt;">-->
+<!--<span style="background-color:#DCE6F1;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>&nbsp;</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="167" valign="bottom" nowrap="" style="width:100.25pt;height:15pt;background-color:#DCE6F1;padding:0 5.4pt;">-->
+<!--<span style="background-color:#DCE6F1;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>&nbsp;</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="133" valign="bottom" nowrap="" style="width:80pt;height:15pt;background-color:#DCE6F1;padding:0 5.4pt;">-->
+<!--<span style="background-color:#DCE6F1;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>In-progress</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="80" nowrap="" style="width:48pt;height:15pt;background-color:#DCE6F1;padding:0 5.4pt;">-->
+<!--<span style="background-color:#DCE6F1;">-->
+<!--<div align="center" style="text-align:center;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>2</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--</tr>-->
+<!--<tr height="25" style="height:15pt;">-->
+<!--<td width="236" valign="bottom" nowrap="" style="width:141.75pt;height:15pt;background-color:#DCE6F1;padding:0 5.4pt;">-->
+<!--<span style="background-color:#DCE6F1;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>&nbsp;</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="167" valign="bottom" nowrap="" style="width:100.25pt;height:15pt;background-color:#DCE6F1;padding:0 5.4pt;">-->
+<!--<span style="background-color:#DCE6F1;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Bug found</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="133" valign="bottom" nowrap="" style="width:80pt;height:15pt;background-color:#DCE6F1;padding:0 5.4pt;">-->
+<!--<span style="background-color:#DCE6F1;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Open</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="80" nowrap="" style="width:48pt;height:15pt;background-color:#DCE6F1;padding:0 5.4pt;">-->
+<!--<span style="background-color:#DCE6F1;">-->
+<!--<div align="center" style="text-align:center;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>1</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--</tr>-->
+<!--<tr height="25" style="height:15pt;">-->
+<!--<td width="236" valign="bottom" nowrap="" style="width:141.75pt;height:15pt;background-color:#F2DCDB;padding:0 5.4pt;">-->
+<!--<span style="background-color:#F2DCDB;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>App Core</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="167" valign="bottom" nowrap="" style="width:100.25pt;height:15pt;background-color:#F2DCDB;padding:0 5.4pt;">-->
+<!--<span style="background-color:#F2DCDB;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Testing request</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="133" valign="bottom" nowrap="" style="width:80pt;height:15pt;background-color:#F2DCDB;padding:0 5.4pt;">-->
+<!--<span style="background-color:#F2DCDB;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>In-progress</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="80" valign="bottom" nowrap="" style="width:48pt;height:15pt;background-color:#F2DCDB;padding:0 5.4pt;">-->
+<!--<span style="background-color:#F2DCDB;">-->
+<!--<div align="center" style="text-align:center;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>1</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--</tr>-->
+<!--<tr height="25" style="height:15pt;">-->
+<!--<td width="236" valign="bottom" nowrap="" style="width:141.75pt;height:15pt;background-color:#EBF1DE;padding:0 5.4pt;">-->
+<!--<span style="background-color:#EBF1DE;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Content Everywhere</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="167" valign="bottom" nowrap="" style="width:100.25pt;height:15pt;background-color:#EBF1DE;padding:0 5.4pt;">-->
+<!--<span style="background-color:#EBF1DE;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Testing request</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="133" valign="bottom" nowrap="" style="width:80pt;height:15pt;background-color:#EBF1DE;padding:0 5.4pt;">-->
+<!--<span style="background-color:#EBF1DE;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Done</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="80" valign="bottom" nowrap="" style="width:48pt;height:15pt;background-color:#EBF1DE;padding:0 5.4pt;">-->
+<!--<span style="background-color:#EBF1DE;">-->
+<!--<div align="center" style="text-align:center;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>2</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--</tr>-->
+<!--<tr height="25" style="height:15pt;">-->
+<!--<td width="236" valign="bottom" nowrap="" style="width:141.75pt;height:15pt;background-color:#EBF1DE;padding:0 5.4pt;">-->
+<!--<span style="background-color:#EBF1DE;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>&nbsp;</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="167" valign="bottom" nowrap="" style="width:100.25pt;height:15pt;background-color:#EBF1DE;padding:0 5.4pt;">-->
+<!--<span style="background-color:#EBF1DE;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>&nbsp;</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="133" valign="bottom" nowrap="" style="width:80pt;height:15pt;background-color:#EBF1DE;padding:0 5.4pt;">-->
+<!--<span style="background-color:#EBF1DE;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>In-progress</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="80" valign="bottom" nowrap="" style="width:48pt;height:15pt;background-color:#EBF1DE;padding:0 5.4pt;">-->
+<!--<span style="background-color:#EBF1DE;">-->
+<!--<div align="center" style="text-align:center;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>1</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--</tr>-->
+<!--<tr height="25" style="height:15pt;">-->
+<!--<td width="236" valign="bottom" nowrap="" style="width:141.75pt;height:15pt;background-color:#EBF1DE;padding:0 5.4pt;">-->
+<!--<span style="background-color:#EBF1DE;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>&nbsp;</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="167" valign="bottom" nowrap="" style="width:100.25pt;height:15pt;background-color:#EBF1DE;padding:0 5.4pt;">-->
+<!--<span style="background-color:#EBF1DE;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Bug found</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="133" valign="bottom" nowrap="" style="width:80pt;height:15pt;background-color:#EBF1DE;padding:0 5.4pt;">-->
+<!--<span style="background-color:#EBF1DE;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Open</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="80" valign="bottom" nowrap="" style="width:48pt;height:15pt;background-color:#EBF1DE;padding:0 5.4pt;">-->
+<!--<span style="background-color:#EBF1DE;">-->
+<!--<div align="center" style="text-align:center;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>1</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--</tr>-->
+<!--<tr height="25" style="height:15pt;">-->
+<!--<td width="236" valign="bottom" nowrap="" style="width:141.75pt;height:15pt;background-color:#E4DFEC;padding:0 5.4pt;">-->
+<!--<span style="background-color:#E4DFEC;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Content Experience</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="167" valign="bottom" nowrap="" style="width:100.25pt;height:15pt;background-color:#E4DFEC;padding:0 5.4pt;">-->
+<!--<span style="background-color:#E4DFEC;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Testing request</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="133" valign="bottom" nowrap="" style="width:80pt;height:15pt;background-color:#E4DFEC;padding:0 5.4pt;">-->
+<!--<span style="background-color:#E4DFEC;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Done</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="80" valign="bottom" nowrap="" style="width:48pt;height:15pt;background-color:#E4DFEC;padding:0 5.4pt;">-->
+<!--<span style="background-color:#E4DFEC;">-->
+<!--<div align="center" style="text-align:center;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>4</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--</tr>-->
+<!--<tr height="25" style="height:15pt;">-->
+<!--<td width="236" valign="bottom" nowrap="" style="width:141.75pt;height:15pt;background-color:#E4DFEC;padding:0 5.4pt;">-->
+<!--<span style="background-color:#E4DFEC;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>&nbsp;</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="167" valign="bottom" nowrap="" style="width:100.25pt;height:15pt;background-color:#E4DFEC;padding:0 5.4pt;">-->
+<!--<span style="background-color:#E4DFEC;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Bug found</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="133" valign="bottom" nowrap="" style="width:80pt;height:15pt;background-color:#E4DFEC;padding:0 5.4pt;">-->
+<!--<span style="background-color:#E4DFEC;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Open</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="80" valign="bottom" nowrap="" style="width:48pt;height:15pt;background-color:#E4DFEC;padding:0 5.4pt;">-->
+<!--<span style="background-color:#E4DFEC;">-->
+<!--<div align="center" style="text-align:center;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>2</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--</tr>-->
+<!--<tr height="25" style="height:15pt;">-->
+<!--<td width="236" valign="bottom" nowrap="" style="width:141.75pt;height:15pt;background-color:#DAEEF3;padding:0 5.4pt;">-->
+<!--<span style="background-color:#DAEEF3;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Continuous Configuration</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="167" valign="bottom" nowrap="" style="width:100.25pt;height:15pt;background-color:#DAEEF3;padding:0 5.4pt;">-->
+<!--<span style="background-color:#DAEEF3;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Testing request</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="133" valign="bottom" nowrap="" style="width:80pt;height:15pt;background-color:#DAEEF3;padding:0 5.4pt;">-->
+<!--<span style="background-color:#DAEEF3;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Done</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="80" valign="bottom" nowrap="" style="width:48pt;height:15pt;background-color:#DAEEF3;padding:0 5.4pt;">-->
+<!--<span style="background-color:#DAEEF3;">-->
+<!--<div align="center" style="text-align:center;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>1</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--</tr>-->
+<!--<tr height="25" style="height:15pt;">-->
+<!--<td width="236" valign="bottom" nowrap="" style="width:141.75pt;height:15pt;background-color:#DAEEF3;padding:0 5.4pt;">-->
+<!--<span style="background-color:#DAEEF3;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>&nbsp;</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="167" valign="bottom" nowrap="" style="width:100.25pt;height:15pt;background-color:#DAEEF3;padding:0 5.4pt;">-->
+<!--<span style="background-color:#DAEEF3;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>&nbsp;</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="133" valign="bottom" nowrap="" style="width:80pt;height:15pt;background-color:#DAEEF3;padding:0 5.4pt;">-->
+<!--<span style="background-color:#DAEEF3;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>In-progress</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="80" valign="bottom" nowrap="" style="width:48pt;height:15pt;background-color:#DAEEF3;padding:0 5.4pt;">-->
+<!--<span style="background-color:#DAEEF3;">-->
+<!--<div align="center" style="text-align:center;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>4</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--</tr>-->
+<!--<tr height="25" style="height:15pt;">-->
+<!--<td width="236" valign="bottom" nowrap="" style="width:141.75pt;height:15pt;background-color:#DAEEF3;padding:0 5.4pt;">-->
+<!--<span style="background-color:#DAEEF3;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>&nbsp;</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="167" valign="bottom" nowrap="" style="width:100.25pt;height:15pt;background-color:#DAEEF3;padding:0 5.4pt;">-->
+<!--<span style="background-color:#DAEEF3;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Bug found</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="133" valign="bottom" nowrap="" style="width:80pt;height:15pt;background-color:#DAEEF3;padding:0 5.4pt;">-->
+<!--<span style="background-color:#DAEEF3;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Open</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="80" valign="bottom" nowrap="" style="width:48pt;height:15pt;background-color:#DAEEF3;padding:0 5.4pt;">-->
+<!--<span style="background-color:#DAEEF3;">-->
+<!--<div align="center" style="text-align:center;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>8</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--</tr>-->
+<!--<tr height="25" style="height:15pt;">-->
+<!--<td width="236" valign="bottom" nowrap="" style="width:141.75pt;height:15pt;background-color:#FDE9D9;padding:0 5.4pt;">-->
+<!--<span style="background-color:#FDE9D9;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Playback Control</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="167" valign="bottom" nowrap="" style="width:100.25pt;height:15pt;background-color:#FDE9D9;padding:0 5.4pt;">-->
+<!--<span style="background-color:#FDE9D9;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Testing request</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="133" valign="bottom" nowrap="" style="width:80pt;height:15pt;background-color:#FDE9D9;padding:0 5.4pt;">-->
+<!--<span style="background-color:#FDE9D9;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Done</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="80" valign="bottom" nowrap="" style="width:48pt;height:15pt;background-color:#FDE9D9;padding:0 5.4pt;">-->
+<!--<span style="background-color:#FDE9D9;">-->
+<!--<div align="center" style="text-align:center;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>3</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--</tr>-->
+<!--<tr height="25" style="height:15pt;">-->
+<!--<td width="236" valign="bottom" nowrap="" style="width:141.75pt;height:15pt;background-color:#FDE9D9;padding:0 5.4pt;">-->
+<!--<span style="background-color:#FDE9D9;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>&nbsp;</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="167" valign="bottom" nowrap="" style="width:100.25pt;height:15pt;background-color:#FDE9D9;padding:0 5.4pt;">-->
+<!--<span style="background-color:#FDE9D9;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>&nbsp;</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="133" valign="bottom" nowrap="" style="width:80pt;height:15pt;background-color:#FDE9D9;padding:0 5.4pt;">-->
+<!--<span style="background-color:#FDE9D9;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>In-progress</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="80" valign="bottom" nowrap="" style="width:48pt;height:15pt;background-color:#FDE9D9;padding:0 5.4pt;">-->
+<!--<span style="background-color:#FDE9D9;">-->
+<!--<div align="center" style="text-align:center;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>2</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--</tr>-->
+<!--<tr height="25" style="height:15pt;">-->
+<!--<td width="236" valign="bottom" nowrap="" style="width:141.75pt;height:15pt;background-color:#FDE9D9;padding:0 5.4pt;">-->
+<!--<span style="background-color:#FDE9D9;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>&nbsp;</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="167" valign="bottom" nowrap="" style="width:100.25pt;height:15pt;background-color:#FDE9D9;padding:0 5.4pt;">-->
+<!--<span style="background-color:#FDE9D9;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Bug found</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="133" valign="bottom" nowrap="" style="width:80pt;height:15pt;background-color:#FDE9D9;padding:0 5.4pt;">-->
+<!--<span style="background-color:#FDE9D9;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Open</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--<td width="80" valign="bottom" nowrap="" style="width:48pt;height:15pt;background-color:#FDE9D9;padding:0 5.4pt;">-->
+<!--<span style="background-color:#FDE9D9;">-->
+<!--<div align="center" style="text-align:center;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>2</b></font></span></font></div>-->
+<!--</span></td>-->
+<!--</tr>-->
+<!--</tbody></table>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><b>&nbsp;</b></span></font></div>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font size="4"><span style="font-size:14pt;"><b>&nbsp;</b></span></font></span></font></div>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font size="4"><span style="font-size:14pt;"><b>Details of the assignment:</b></span></font></span></font></div>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black">&nbsp;</font></span></font></div>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font size="4" color="#0070C0"><span style="font-size:14pt;"><b>Initial Configuration</b></span></font></span></font></div>-->
+<!--<div style="text-indent:14pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font size="4" color="black"><span style="font-size:14pt;"><b>Testing request</b></span></font></span></font></div>-->
+<!--<div style="text-indent:22pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Done</b></font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=0ybCZepzVs6jTDa6ELhSdxb8hvNizsYNdR0JeQUS-q89g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9427" target="_blank" rel="noopener noreferrer">PMA-9427</a><font color="black">-->
+<!-- - [iOS][BTO State][Roam/Roam SL] BLE setup flow failed to trigger after entering Setup Ready State from BTO State</font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=6wpVVWL70zGUTXoWSUXsRqjUBp4bAf5Ik1-zwx9D91E9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9708" target="_blank" rel="noopener noreferrer">PMA-9708</a><font color="black">-->
+<!-- - [Android][Sidecar][BTO State] BLE/AP connect setup flows fail to be triggered</font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=kidyZtQ3C7IjaDyaYD1ivkFhEFtWnunQ1wSywjvjRJw9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9960" target="_blank" rel="noopener noreferrer">PMA-9960</a><font color="black">-->
+<!-- - Smoke Test Mar 25</font></span></font></div>-->
+<!--<div style="text-indent:22pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>In-progress</b></font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=bLTDdTbnLtN9spo8QvG8MrbO6ZoeXKH2d4WpcI39a9A9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fSWPBL-224790" target="_blank" rel="noopener noreferrer">SWPBL-224790</a><font color="black">-->
+<!-- - Run setup regression test plan for Sidecar</font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=pzF2KL8Kt7OAhLL3QGN_GL9JiG2UPv0zw5zYQc0al2g9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-8438" target="_blank" rel="noopener noreferrer">PMA-8438</a><font color="black">-->
+<!-- - Spec Walk</font></span></font></div>-->
+<!--<div style="text-indent:14pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font size="4" color="black"><span style="font-size:14pt;"><b>Bug found</b></span></font></span></font></div>-->
+<!--<div style="text-indent:22pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Open</b></font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=NhB270RwOswsvolYvEBy1b2jHT0E2NUx6yk5CjKOIZU9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9941" target="_blank" rel="noopener noreferrer">PMA-9941</a><font color="black">-->
+<!-- - [Android] Failed to add player to existing HH</font></span></font></div>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black">&nbsp;</font></span></font></div>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font size="4" color="#0070C0"><span style="font-size:14pt;"><b>App Core</b></span></font></span></font></div>-->
+<!--<div style="text-indent:14pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font size="4" color="black"><span style="font-size:14pt;"><b>Testing request</b></span></font></span></font></div>-->
+<!--<div style="text-indent:22pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>In-progress</b></font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=rVZ7eA-9PbQV6QGb4deK6y5lBfSMbc0s&#45;&#45;70PLUyy2I9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-6468" target="_blank" rel="noopener noreferrer">PMA-6468</a><font color="black">-->
+<!-- - Implement "Resend Email Verification" (Passport calls API directly)</font></span></font></div>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black">&nbsp;</font></span></font></div>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font size="4" color="#0070C0"><span style="font-size:14pt;"><b>Content Everywhere</b></span></font></span></font></div>-->
+<!--<div style="text-indent:14pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font size="4" color="black"><span style="font-size:14pt;"><b>Testing request</b></span></font></span></font></div>-->
+<!--<div style="text-indent:22pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Done</b></font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=TzBnt65UUTY1KyJYTqrnH6ZkupQm8A7cqWBu72nC5fE9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9939" target="_blank" rel="noopener noreferrer">PMA-9939</a><font color="black">-->
+<!-- - Smoke Test - 25-Mar-2024</font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=0iMjOV-n7FPRq_LvZflajAqx25sX7TgJacDnY5TXDe49g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-5604" target="_blank" rel="noopener noreferrer">PMA-5604</a><font color="black">-->
+<!-- - [iOS] Content Hero Header Mosaic - Sonos Playlist</font></span></font></div>-->
+<!--<div style="text-indent:22pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>In-progress</b></font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=4yROz8fLI-rDZhzlDcLpyk5mOCyGhIxWOFKFLQ6jBdg9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9826" target="_blank" rel="noopener noreferrer">PMA-9826</a><font color="black">-->
+<!-- - Test content loading after updating getExtendedMetadata</font></span></font></div>-->
+<!--<div style="text-indent:14pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font size="4" color="black"><span style="font-size:14pt;"><b>Bug found</b></span></font></span></font></div>-->
+<!--<div style="text-indent:22pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Open</b></font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=6GGwLvhlJfjY-BaPObtlJzl6RCFJ04HK6LgdHrnTB4k9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9950" target="_blank" rel="noopener noreferrer">PMA-9950</a><font color="black">-->
+<!-- - [iOS][Android] Missing Play and Deeplink buttons in Spotify Free Content Hero views</font></span></font></div>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black">&nbsp;</font></span></font></div>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font size="4" color="#0070C0"><span style="font-size:14pt;"><b>Content Experience</b></span></font></span></font></div>-->
+<!--<div style="text-indent:14pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font size="4" color="black"><span style="font-size:14pt;"><b>Testing request</b></span></font></span></font></div>-->
+<!--<div style="text-indent:22pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Done</b></font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=dV72WRzwF6QaCYVeksMSgQy9-hXcUzfJI7FbAFQBVWo9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-6556" target="_blank" rel="noopener noreferrer">PMA-6556</a><font color="black">-->
+<!-- - [Android] Add Long Press to Open More Menu</font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=fC5C2ld8zHI-P1xfOJj9nQHMuzXzTUeer4eu9iaMr5E9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9428" target="_blank" rel="noopener noreferrer">PMA-9428</a><font color="black">-->
+<!-- - [Android] Manage and Add a new Service still show if Pro user is Employee with ContentAccess</font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=pTnjZQWADZLaBNNUv3nJogFqqIFKRHr176O76Yr8UTc9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9745" target="_blank" rel="noopener noreferrer">PMA-9745</a><font color="black">-->
+<!-- - [iOS][Pinned Collections] Display "No Longer Available" Error When There Are No Accounts</font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=aeXPfLKekot66iTF4tsOHVqY7QfBVZD4_IwzS48rG6s9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9343" target="_blank" rel="noopener noreferrer">PMA-9343</a><font color="black">-->
+<!-- - [iOS] Issues with Pinned Collection in "No Longer Available" State</font></span></font></div>-->
+<!--<div style="text-indent:14pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font size="4" color="black"><span style="font-size:14pt;"><b>Bug found</b></span></font></span></font></div>-->
+<!--<div style="text-indent:22pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Open</b></font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=XSwqzUjh0VcCGt0W1WNDmkkOmjrNLpPWmdTy_IyYFFE9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9953" target="_blank" rel="noopener noreferrer">PMA-9953</a><font color="black">-->
+<!-- - [Android][TalkBack] Unable to open View All of all sections in Home Feed and Service Home</font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=UCjJg5J2EoslX9bKltIz7ROsWGwtzBapdefOQMqBHhc9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9961" target="_blank" rel="noopener noreferrer">PMA-9961</a><font color="black">-->
+<!-- - [iOS] Pinned Collection swimlane reloads after returning from the Edit Home screen</font></span></font></div>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black">&nbsp;</font></span></font></div>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font size="4" color="#0070C0"><span style="font-size:14pt;"><b>Continuous Configuration</b></span></font></span></font></div>-->
+<!--<div style="text-indent:14pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font size="4" color="black"><span style="font-size:14pt;"><b>Testing request</b></span></font></span></font></div>-->
+<!--<div style="text-indent:22pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Done</b></font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=Xl6oyOcALjyvfoeMuOESK3EICTyipC7-smMm7Iu41049g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-8266" target="_blank" rel="noopener noreferrer">PMA-8266</a><font color="black">-->
+<!-- - [Android] Use availability API for all room settings items</font></span></font></div>-->
+<!--<div style="text-indent:22pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>In-progress</b></font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=ZHtbyiKn9cYHbwppX-iWwoWKDXn4wCWMAnDUgOeHrTA9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9671" target="_blank" rel="noopener noreferrer">PMA-9671</a><font color="black">-->
+<!-- - [iOS] [Android] Run a test pass to verify settings options that are available per player</font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=LHvfC-Tp2OyozEiaP8igCvU4pRUdTg6uPSNAYmbgSXk9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-8070" target="_blank" rel="noopener noreferrer">PMA-8070</a><font color="black">-->
+<!-- - [iOS] Add System Statuses to System Settings</font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=KmLC87Lk7t1XBRFbTblrPLfesDTm1ZaTL7MihYg4jLg9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9460" target="_blank" rel="noopener noreferrer">PMA-9460</a><font color="black">-->
+<!-- - [iOS] Redesigned System Settings</font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=brWjyt1C3WOFqW9p9STNSr8joPtV6ZAChX5iYHfBNls9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9154" target="_blank" rel="noopener noreferrer">PMA-9154</a><font color="black">-->
+<!-- - [Test Pass] Run exploratory localization pass</font></span></font></div>-->
+<!--<div style="text-indent:14pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font size="4" color="black"><span style="font-size:14pt;"><b>Bug found</b></span></font></span></font></div>-->
+<!--<div style="text-indent:22pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Open</b></font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=Zvax3TxkljP9zsTuIiqOHioes2jABEh-uaLqa_0TgNM9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9946" target="_blank" rel="noopener noreferrer">PMA-9946</a><font color="black">-->
+<!-- - [Android] [Amp] The Sub-Audio displays in the Amp room even though the Sub has not been added yet</font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=RarwYopWaXDsVBc75-ROcEqvtvrHcW2A6bn8OOkDFfg9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9945" target="_blank" rel="noopener noreferrer">PMA-9945</a><font color="black">-->
+<!-- - [iOS] Missing Line-Out section in Port Room</font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=ZSPLWun-nvt_ikR93b4cM90f6-C7UYT9oYivi1IkShA9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9949" target="_blank" rel="noopener noreferrer">PMA-9949</a><font color="black">-->
+<!-- - [iOS] [Amp] Crossover Frequency maximum value should be 110Hz instead of 100Hz on Sub-Audio Screen</font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=3slPfvmQ-EPImyVLnEaK7QDSmzFZudqXuJiByICJOtA9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9947" target="_blank" rel="noopener noreferrer">PMA-9947</a><font color="black">-->
+<!-- - [Android] [Spanish/es] The Register screen missing label all fields</font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=t24L-EZot_51BNXph6aABjGI7Ajzth4G5TPbRnbBbHs9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9951" target="_blank" rel="noopener noreferrer">PMA-9951</a><font color="black">-->
+<!-- - [Android] Missing the Suffix "Hz" for Crossover Frequency value on Sub Audio Screen</font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=SlRqACAzY4lgsLzMBzytuXnISrUzFTkX3JWAGXqrKYA9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9954" target="_blank" rel="noopener noreferrer">PMA-9954</a><font color="black">-->
+<!-- - [Android] [Spanish/es] "Email" label displays "Username" label in Spanish</font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=OztgBLIfVg-rP3-NP7oc2SmyvpyNJilwUna8qliGRkM9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9956" target="_blank" rel="noopener noreferrer">PMA-9956</a><font color="black">-->
+<!-- - [iOS] [Amp] IR Repeater should not display in Amp Room/Home Theater section</font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=IHtj99DMyVirU4SwwcUW1SiZyA1Sv3Q1fLD1Q9tuICQ9g29GdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9959" target="_blank" rel="noopener noreferrer">PMA-9959</a><font color="black">-->
+<!-- - [iOS] The subtitle text under Crossover Frequency should be fully displayed</font></span></font></div>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black">&nbsp;</font></span></font></div>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font size="4" color="#0070C0"><span style="font-size:14pt;"><b>Playback Control</b></span></font></span></font></div>-->
+<!--<div style="text-indent:14pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font size="4" color="black"><span style="font-size:14pt;"><b>Testing request</b></span></font></span></font></div>-->
+<!--<div style="text-indent:22pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Done</b></font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=AW-XbUMFYrO2X-NixT5Z22kO6Dbm98nlYCdv1qh7cGF4i3NGdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-8748" target="_blank" rel="noopener noreferrer">PMA-8748</a><font color="black">-->
+<!-- - [iOS] Glimmer the session controller/mini-player at the most common height</font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=8QKzmdPB20U_tTzOR4cY3eSjM1akd1BGoP_CzcN3EoV4i3NGdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9338" target="_blank" rel="noopener noreferrer">PMA-9338</a><font color="black">-->
+<!-- - [Android] Reload queue view after shuffle</font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=XnjtOjPSoy2y7BUqqMwQfgeKoragD1v_oIm-5yyhJxB4i3NGdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9525" target="_blank" rel="noopener noreferrer">PMA-9525</a><font color="black">-->
+<!-- - [Android] Unresponsive App During Simultaneous Usage</font></span></font></div>-->
+<!--<div style="text-indent:22pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>In-progress</b></font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=3hGTC8_2sFl8FGoG1hWGDwEA20Ao5vNO2GIotGX-nwp4i3NGdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-5326" target="_blank" rel="noopener noreferrer">PMA-5326</a><font color="black">-->
+<!-- - [iOS][Queue] Fit and finish</font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=pQOVdvyr3IDpYPUu4TEy2p5_TpjI92dD1_uLmOTQV8R4i3NGdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9559" target="_blank" rel="noopener noreferrer">PMA-9559</a><font color="black">-->
+<!-- - [Android] Refresh queue if version does not match</font></span></font></div>-->
+<!--<div style="text-indent:14pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font size="4" color="black"><span style="font-size:14pt;"><b>Bug found</b></span></font></span></font></div>-->
+<!--<div style="text-indent:22pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="black"><b>Open</b></font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=70b78PI04zdEea8pFgypbnPzYfy3f3X-gXCCGxkuBpN4i3NGdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9958" target="_blank" rel="noopener noreferrer">PMA-9958</a><font color="black">-->
+<!-- - [iOS] The gradient (fade) at the bottom of the queue view is not visible</font></span></font></div>-->
+<!--<div style="text-indent:33pt;margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=vXFxn-9X9ltfV7JaFz-LSlSjiiXmLRdS1ki_H57AnT0tTnRGdU3cCA..&amp;URL=https%3a%2f%2fjira.sonos.com%2fbrowse%2fPMA-9963" target="_blank" rel="noopener noreferrer">PMA-9963</a><font color="black">-->
+<!-- - [iOS] [Queue] The color of toast errors appears too dark</font></span></font></div>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;">&nbsp;</span></font></div>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;">Thank you and best regards,</span></font></div>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;">&nbsp;</span></font></div>-->
+<!--<table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">-->
+<!--<tbody><tr height="26" style="height:15.75pt;">-->
+<!--<td width="270" style="width:162.2pt;height:15.75pt;padding:0 5.4pt;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font face="Arial,sans-serif" color="#104B8E"><b>Hieu Dang</b></font></span></font></div>-->
+<!--</td>-->
+<!--<td width="85" style="width:51.3pt;height:15.75pt;padding:0 5.4pt;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font face="Arial,sans-serif" size="2" color="#003300"><span style="font-size:9pt;">&nbsp; </span></font></span></font></div>-->
+<!--</td>-->
+<!--<td colspan="2" width="442" style="width:265.3pt;height:15.75pt;padding:0 5.4pt;">-->
+<!--</td>-->
+<!--</tr>-->
+<!--<tr height="15" style="height:9pt;">-->
+<!--<td width="270" style="width:162.2pt;height:9pt;padding:0 5.4pt;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font face="Arial,sans-serif" size="2" color="#003300"><span style="font-size:10pt;"><b>AGEST</b></span></font><font face="Arial,sans-serif" size="2" color="#003300"><span style="font-size:10pt;" lang="vi"><b>-->
+<!--Vietnam</b></span></font></span></font></div>-->
+<!--</td>-->
+<!--<td width="85" style="width:51.3pt;height:9pt;padding:0 5.4pt;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font face="Arial,sans-serif" size="2" color="#003300"><span style="font-size:9pt;">&nbsp; </span></font><font face="Arial,sans-serif" size="2" color="#003300"><span style="font-size:9pt;" lang="vi">Email:</span></font></span></font></div>-->
+<!--</td>-->
+<!--<td colspan="2" width="442" style="width:265.3pt;height:9pt;padding:0 5.4pt;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=Moymfjuo1L8HVUYK3iXKgUyK3L7z5ON0ZGOiT6KK6S4tTnRGdU3cCA..&amp;URL=mailto%3ahieu.ngoc.dang%40agest.vn" target="_blank" rel="noopener noreferrer"><font face="Arial,sans-serif" size="2"><span style="font-size:9pt;">hieu.ngoc.dang@agest.vn</span></font></a></span></font></div>-->
+<!--</td>-->
+<!--</tr>-->
+<!--<tr height="24" style="height:14.85pt;">-->
+<!--<td width="270" style="width:162.2pt;height:14.85pt;padding:0 5.4pt;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font face="Arial,sans-serif" size="2" color="#003300"><span style="font-size:10pt;">Test Engineer</span></font></span></font></div>-->
+<!--</td>-->
+<!--<td width="85" style="width:51.3pt;height:14.85pt;padding:0 5.4pt;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font face="Arial,sans-serif" size="2" color="#003300"><span style="font-size:9pt;">&nbsp; </span></font><font face="Arial,sans-serif" size="2" color="#003300"><span style="font-size:9pt;" lang="vi">Website:</span></font></span></font></div>-->
+<!--</td>-->
+<!--<td colspan="2" width="442" style="width:265.3pt;height:14.85pt;padding:0 5.4pt;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=jtoLviFSW2NYXILsORDzT30So7J7jXW0xSi5h7ryig4tTnRGdU3cCA..&amp;URL=http%3a%2f%2fwww.agest.vn%2f" target="_blank" rel="noopener noreferrer"><font face="Arial,sans-serif" size="2" color="#0070C0"><span style="font-size:9pt;" lang="vi">www.agest.vn</span></font></a></span></font></div>-->
+<!--</td>-->
+<!--</tr>-->
+<!--<tr height="12" style="height:7.65pt;">-->
+<!--<td colspan="4" width="798" style="width:478.8pt;height:7.65pt;padding:0 5.4pt;border-style:none none solid none;border-bottom-width:1.5pt;border-bottom-color:#4472C4;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font size="1" color="#1F497D"><span style="font-size:8pt;">&nbsp;</span></font></span></font></div>-->
+<!--</td>-->
+<!--</tr>-->
+<!--<tr height="63" style="height:38.3pt;">-->
+<!--<td colspan="3" width="625" style="width:375.5pt;height:38.3pt;padding:0 5.4pt;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="#1F497D">&nbsp;</font></span></font></div>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><img src="attachment.ashx?id=RgAAAACZZh6oO4juSpgY6QhVy67wBwAx7zm1qdynRaThyWRIMy8yAAAAJf48AADKuUan7PxASY7iCKtfrJ7PAAAhRw2hAAAJ&amp;attcnt=1&amp;attid0=BAAAAAAA&amp;attcid0=image001.png%4001DA7ED9.FC1A3570" alt="Description: cid:image006.png@01DA0B24.38A1FFC0" height="51" width="223" border="0"></span></font></div>-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font color="#1F497D">&nbsp;</font></span></font></div>-->
+<!--</td>-->
+<!--<td width="172" style="width:103.3pt;height:38.3pt;padding:0 5.4pt;">-->
+<!--<div align="right" style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><a href="redir.aspx?C=KdYRMzGpyHE9Bm_GFB7PiwVFF8KPJCx167gCSoaTTtUtTnRGdU3cCA..&amp;URL=https%3a%2f%2fwww.facebook.com%2flogigearhcmc" target="_blank" rel="noopener noreferrer"><img src="attachment.ashx?id=RgAAAACZZh6oO4juSpgY6QhVy67wBwAx7zm1qdynRaThyWRIMy8yAAAAJf48AADKuUan7PxASY7iCKtfrJ7PAAAhRw2hAAAJ&amp;attcnt=1&amp;attid0=BAABAAAA&amp;attcid0=image002.png%4001DA7ED9.FC1A3570" alt="Description: Description: Description: facebook icon" height="28" width="28" border="0"></a><font face="Arial,sans-serif" size="2" color="#337AB7"><span style="font-size:10pt;" lang="vi">&nbsp;-->
+<!--</span></font><a href="redir.aspx?C=zbOaQTPcHijkDm1LDeYz_Kp2Sa2eZkXAqHC2wQRaEzQtTnRGdU3cCA..&amp;URL=https%3a%2f%2ftwitter.com%2flogigear%3flang%3den" target="_blank" rel="noopener noreferrer"><img src="attachment.ashx?id=RgAAAACZZh6oO4juSpgY6QhVy67wBwAx7zm1qdynRaThyWRIMy8yAAAAJf48AADKuUan7PxASY7iCKtfrJ7PAAAhRw2hAAAJ&amp;attcnt=1&amp;attid0=BAACAAAA&amp;attcid0=image003.png%4001DA7ED9.FC1A3570" alt="Description: Description: Description: twitter icon" height="28" width="28" border="0"></a><font face="Arial,sans-serif" size="2" color="#337AB7"><span style="font-size:10pt;" lang="vi">&nbsp;&nbsp;</span></font><a href="redir.aspx?C=Pzgn37FCpVG_J_KoCWU4j-1sqjjyPTqJd535-0AJCt8tTnRGdU3cCA..&amp;URL=https%3a%2f%2fwww.linkedin.com%2fcompany%2flogigear-corporation%2fmycompany%2f" target="_blank" rel="noopener noreferrer"><img src="attachment.ashx?id=RgAAAACZZh6oO4juSpgY6QhVy67wBwAx7zm1qdynRaThyWRIMy8yAAAAJf48AADKuUan7PxASY7iCKtfrJ7PAAAhRw2hAAAJ&amp;attcnt=1&amp;attid0=BAADAAAA&amp;attcid0=image004.png%4001DA7ED9.FC1A3570" alt="Description: Description: Description: linkedin icon" height="28" width="28" border="0"></a></span></font></div>-->
+<!--</td>-->
+<!--</tr>-->
+<!--<tr height="65" style="height:39.2pt;">-->
+<!--<td colspan="4" width="798" style="width:478.8pt;height:39.2pt;padding:0 5.4pt;">-->
+<!--<div style="margin:0;"><font face="Calibri,sans-serif" size="2"><span style="font-size:11pt;"><font face="Arial,sans-serif" size="2" color="gray"><span style="font-size:9pt;"><i>Privacy &amp; Confidentiality Notice: The information contained in this electronic-->
+<!--mail message is intended for the named recipient(s) only. It may contain privileged and confidential information.&nbsp;If you have received this electronic message in error, please notify the sender immediately.</i></span></font></span></font></div>-->
+<!--</td>-->
+<!--</tr>-->
+<!--</tbody></table>-->
+<!--</div>-->
+<!--</span></div>-->
+<!--</div>-->
+<!--</div></div>-->

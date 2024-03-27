@@ -1,0 +1,33 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h4>Data
+        <a routerLink="/generate-report" class="btn btn-primary float-end"><i class="bi bi-cloud-arrow-down"></i> Get Report</a>
+      </h4>
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered border-primary">
+        <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Team</th>
+          <th scope="col">Action</th>
+          <th scope="col">Jira ID</th>
+          <th scope="col">Jira Summary</th>
+          <th scope="col">Working Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let report of this.reports">
+          <td>{{ report.date }}</td>
+          <td>{{ report.team }}</td>
+          <td>{{ report.action }}</td>
+          <td>{{ report.jira_id }}</td>
+          <td>{{ report.jira_summary }}</td>
+          <td>{{ report.working_status }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -416,5 +416,13 @@
       "tester_3": null,
       "jira_id_summary": "PMA-10036 - [iOS] VoiceOver reads miss \"Button\" text of View All/ More/ Manage button"
     }
+  ],
+  "team": [
+    {
+      "team": "8 - Initial Configuration 7"
+    },
+    {
+      "team": "7 - Initial Configuration 8"
+    }
   ]
 }

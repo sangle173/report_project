@@ -7,4 +7,3 @@ Need to update used packages by enter command:
 
 + Run angular application by command:
   ## ng serve --o
-      

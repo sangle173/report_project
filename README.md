@@ -1,9 +1,7 @@
-# Angular - json-server - Report
-
+# Report App
+Install node js on nodejs folder
 Need to update used packages by enter command:
-   1. ## npm i
-+ Run json-server by command:
-  ## npx json-server --watch db.json
-
-+ Run angular application by command:
-  ## ng serve --o
+   1. npm i
+   2. npm install -g @angular/cli
+   3. ng serve --o
+  

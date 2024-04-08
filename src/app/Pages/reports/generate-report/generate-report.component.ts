@@ -172,7 +172,7 @@ export class GenerateReportComponent {
   getReports() {
     this.loadingTitle = "loading report ...";
     this.isLoading = true;
-    let today = formatDate(new Date(), 'dd-MMM-yyyy', "en-US")
+    let today = formatDate(new Date(), 'd-MMM-yyyy', "en-US")
     this.service.listSheet().subscribe((data: any) => {
       this.reports = data;
       for (let i = 0; i <data.length ; i++) {

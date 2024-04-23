@@ -2,27 +2,73 @@
   <div class="card">
     <div class="card-header">
       <h4>Data
-        <a routerLink="/generate-report" class="btn btn-primary float-end"><i class="bi bi-cloud-arrow-down"></i> Get Report</a>
+        <a routerLink="/generate-report" class="btn btn-primary float-end"><i class="bi bi-cloud-arrow-down"></i> Get
+          Report</a>
       </h4>
     </div>
-    <div class="card-body">
-      <table class="table table-bordered">
-        <tbody>
-        <tr *ngFor="let report of this.data">
-          <td>{{ report[0] }}</td>
-          <td>{{ report[1] }}</td>
-          <td>{{ report[2] }}</td>
-          <td>{{ report[3] }}</td>
-          <td>{{ report[4] }}</td>
-          <td>{{ report[5] }}</td>
-          <td>{{ report[6] }}</td>
-          <td>{{ report[7] }}</td>
-          <td>{{ report[8] }}</td>
-          <td>{{ report[9] }}</td>
-          <td>{{ report[10] }}</td>
-        </tr>
-        </tbody>
-      </table>
+    <div class="row mb-5 mt-5">
+      <form>
+        <div class="row">
+          <div class="col">
+            <select class="form-control" #team id="team">
+              <option value="">Select team</option>
+              <option value="1 - Initial Configuration">1 - Initial Configuration</option>
+              <option value="2 - App Core">2 - App Core</option>
+              <option value="3 - Content Everywhere">3 - Content Everywhere</option>
+              <option value="4 - Content Experience">4 - Content Experience</option>
+              <option value="5 - Continuous Configuration">5 - Continuous Configuration</option>
+              <option value="6 - Playback Control">6 - Playback Control</option>
+            </select>
+          </div>
+          <div class="col">
+            <select class="form-control" #tester1 id="tester1">
+              <option value="">Select Tester</option>
+              <option value="8092 - Canh Tran">8092 - Canh Tran</option>
+              <option value="8237 - Tuong Vo">8237 - Tuong Vo</option>
+              <option value="8297 - Nhi Nguyen">8297 - Nhi Nguyen</option>
+              <option value="8315 - Tai Ngo">8315 - Tai Ngo</option>
+              <option value="8273 - Tai Le">8273 - Tai Le</option>
+              <option value="8302 - Duy Phan">8302 - Duy Phan</option>
+              <option value="8312 - Thanh Dang">8312 - Thanh Dang</option>
+              <option value="8267 - Sang Le">8267 - Sang Le</option>
+              <option value="8316 - Vuong Bui">8316 - Vuong Bui</option>
+              <option value="8262 - Hieu Dang">8262 - Hieu Dang</option>
+              <option value="8166 - Hung Ngo">8166 - Hung Ngo</option>
+              <option value="8303 - Nhan Tran">8303 - Nhan Tran</option>
+              <option value="8061 - Thao Do">8061 - Thao Do</option>
+              <option value="8229 - Nhan Nguyen">8229 - Nhan Nguyen</option>
+            </select>
+          </div>
+          <div class="col">
+            <select class="form-control" #type id="type">
+              <option value="">Select Type</option>
+              <option value="Testing request">Testing request</option>
+              <option value="Bug found">Bug found</option>
+            </select>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-primary mt-2"
+                    (click)="search(team.value, tester1.value, type.value)">Search
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered table-responsive">
+      <tbody>
+      <tr *ngFor="let report of this.dataList">
+        <td>{{ report[0] }}</td>
+        <td>{{ report[1] }}</td>
+        <td>{{ report[2] }}</td>
+        <td><a style="text-decoration: none"
+          [href]="'https://jira.sonos.com/browse/' + report[3]"
+          target="_blank" rel="noopener noreferrer">{{report[3]}}</a> - {{ report[4] }}</td>
+        <td>{{ report[5] }}</td>
+        <td>{{ report[7] }}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>

@@ -9,7 +9,6 @@ export class SheetService {
   constructor(private http: HttpClient) {}
 
   listSheet() {
-    console.log(this.http.get(`${environment.CONNECTION_URL}`));
     return this.http.get(`${environment.CONNECTION_URL}`);
   }
 }

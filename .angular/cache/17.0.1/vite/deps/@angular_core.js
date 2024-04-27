@@ -427,7 +427,7 @@ import {
   ɵɵtrustConstantResourceUrl,
   ɵɵvalidateIframeAttribute,
   ɵɵviewQuery
-} from "./chunk-C2ZUKLFK.js";
+} from "./chunk-NEI5XYPX.js";
 import "./chunk-FWOMF3V2.js";
 export {
   ANIMATION_MODULE_TYPE,

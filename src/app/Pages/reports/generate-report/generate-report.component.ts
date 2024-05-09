@@ -176,7 +176,11 @@ export class GenerateReportComponent {
     this.service.listSheet().subscribe((data: any) => {
       this.reports = data;
       for (let i = 0; i <data.length ; i++) {
-        this.reports[i]['date'] = data[i][0];
+        if(data[i][0] !== undefined) {
+          this.reports[i]['date'] = data[i][0];
+        } else {
+          this.reports[i]['date'] = data[i]['                 '];
+        }
         this.reports[i]['team'] = data[i][1];
         this.reports[i]['action'] = data[i][2];
         this.reports[i]['jira_id'] = data[i][3];

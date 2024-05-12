@@ -6,6 +6,7 @@ import { UserListComponent } from './Pages/users/user-list/user-list.component';
 import { SignupComponent } from './Pages/users/signup/signup.component';
 import {ShowComponent} from "./Pages/reports/show/show.component";
 import {GenerateReportComponent} from "./Pages/reports/generate-report/generate-report.component";
+import {IpSearchComponent} from "./Pages/ip-search/ip-search.component";
 
 const routes: Routes = [
   { path: 'home', component: GenerateReportComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'user-list', component: UserListComponent , title: 'User List'},
   { path: 'report-show', component: ShowComponent , title: 'Report Show'},
   { path: 'generate-report', component: GenerateReportComponent , title: 'Report'},
+  { path: 'ip-search', component: IpSearchComponent , title: 'IP Search'},
 ];
 
 @NgModule({

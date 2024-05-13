@@ -15,6 +15,7 @@ import { FooterComponent } from './Pages/partials/footer/footer.component';
 import { UserService } from './Services/user.service';
 import {ShowComponent} from "./Pages/reports/show/show.component";
 import {GenerateReportComponent} from "./Pages/reports/generate-report/generate-report.component";
+import { IpSearchComponent } from './Pages/ip-search/ip-search.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {GenerateReportComponent} from "./Pages/reports/generate-report/generate-
     FooterComponent,
     ShowComponent,
     GenerateReportComponent,
+    IpSearchComponent,
   ],
   imports: [
     BrowserModule,

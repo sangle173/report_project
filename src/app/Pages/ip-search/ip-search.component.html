@@ -21,10 +21,12 @@
             <div class="col-lg-5">
               <h6>System Players</h6>
               <hr>
-<!--              <iframe [src]="'http://' + showIpAddress + ':1400/support/review'" title="Reset" frameborder="0" width="100%"-->
-<!--                      height="1000px"></iframe>-->
-              <iframe src="http://192.168.2.13/my-app/public/" title="Reset" frameborder="0" width="100%"
+<!--              <p>http://{{showIpAddress()}}:1400/support/review</p>-->
+              <a [href]="'http://' + showIpAddress() + ':1400/support/review'">{{showIpAddress()}}</a>
+              <iframe [src]="'http://' + showIpAddress() + ':1400/support/review'" title="Demo" frameborder="0" width="100%"
                       height="1000px"></iframe>
+<!--              <iframe src="http://192.168.188.147/my-app/public/" title="Reset" frameborder="0" width="100%"-->
+<!--                      height="1000px"></iframe>-->
             </div>
 
 

@@ -153,6 +153,29 @@ export class GenerateReportComponent {
         "data": [],
         "no": 0
       }
+    },
+    {
+      "name": "9 - Pinewood",
+      "display": "Pinewood",
+      "color": "#F4B083",
+      "testing_request_done": {
+        "name": "Testing request",
+        "status": "Done",
+        "data": [],
+        "no": 0
+      },
+      "testing_request_inprogress": {
+        "name": "Testing request",
+        "status": "In-progress",
+        "data": [],
+        "no": 0
+      },
+      "bug_found": {
+        "name": "Bug found",
+        "status": "Open",
+        "data": [],
+        "no": 0
+      }
     }
   ]
   date: any;

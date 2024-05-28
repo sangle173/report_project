@@ -1,0 +1,145 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h4>
+        {{subject}}
+        <a [href]="'mailto:?subject=' + subject+ '&cc='+ cc" class="btn btn-primary float-end"><i
+          class="bi bi-cloud-arrow-up"></i> Open Outlook</a>
+      </h4>
+    </div>
+    <div class="card-body">
+      <p>Hi Sri and Chris,</p>
+      <p>Below is the status report for today. Please let me know if you have any comments/questions.</p>
+      <h2>&nbsp;&nbsp;&nbsp;{{subject}}</h2>
+      <br>
+      <h5>I - TODAY'S ACCOMPLISHMENTS</h5>
+      <div *ngFor="let item of this.reportDataToday; let i = index">
+        <h6 style="margin-left: 10px">{{i + 1}} - {{item.jira_summary}}: <span
+          [style.color]="item.ticket_status=='Done' ? 'green': 'blue'">{{item.ticket_status === 'Done' ? 'Completed' : item.ticket_status }}</span>
+        </h6>
+
+        <table>
+          <tbody>
+          <tr>
+            <td>Jira Story:</td>
+            <td><a [href]="'https://jira.sonos.com/browse/' + item.jira_id" target="_blank">{{item.jira_id}}</a></td>
+          </tr>
+          <tr>
+            <td>
+              Test Plan:
+            </td>
+            <td>
+              <a [href]="item.test_plan" target="_blank">{{item.test_plan}}</a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <table>
+          <tbody>
+          <tr>
+            <td rowspan="3" style="vertical-align: top">Executed:</td>
+            <th style="color: blue">Total:</th>
+            <th>{{item.total}}</th>
+            <td>test cases</td>
+          </tr>
+          <tr>
+            <th style="color: green">Passed:</th>
+            <th>{{item.passed}}</th>
+            <td>test cases</td>
+          </tr>
+          <tr>
+            <th style="color: red">Failed:</th>
+            <th>{{item.failed}}</th>
+            <td>test cases</td>
+          </tr>
+          </tbody>
+        </table>
+        <br>
+      </div>
+      <h5>II - TEST ENVIRONMENTS</h5>
+      <div *ngFor="let item of this.reportDataToday; let i = index">
+        <h6 style="margin-left: 10px">{{i + 1}} - {{item.jira_summary}}
+        </h6>
+
+        <table *ngIf="item.task === 'Passport Web Controller'">
+          <tbody>
+          <tr>
+            <td style="vertical-align: top">Email/SonosID:</td>
+            <td style="text-align: left">
+              <ul style="list-style-type: none">
+                <li *ngFor="let itemE of item.email_sonos_id">{{itemE}}</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top">Browsers:</td>
+            <td style="text-align: left">
+              <ul style="list-style-type: none">
+                <li *ngFor="let itemB of item.browser">{{itemB}}</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top">Player:</td>
+            <td style="text-align: left">
+              <ul style="list-style-type: none">
+                <li *ngFor="let itemC of item.player">{{itemC}}</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top">Drop Date:</td>
+            <td style="text-align: left">
+              <ul style="list-style-type: none">
+                <li *ngFor="let itemD of item.drop_date">{{itemD}}</li>
+              </ul>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <table *ngIf="item.task === 'Passport Mobile App'">
+          <tbody>
+          <tr>
+            <td style="vertical-align: top">Email:</td>
+            <td style="text-align: left">
+              <ul style="list-style-type: none">
+                <li *ngFor="let itemE of item.email">{{itemE}}</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top">Builds:</td>
+            <td style="text-align: left">
+              <ul style="list-style-type: none">
+                <li *ngFor="let itemB of item.build">{{itemB}}</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top">Player:</td>
+            <td style="text-align: left">
+              <ul style="list-style-type: none">
+                <li *ngFor="let itemC of item.player_1">{{itemC}}</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top">Devices:</td>
+            <td style="text-align: left">
+              <ul style="list-style-type: none">
+                <li *ngFor="let itemD of item.device">{{itemD}}</li>
+              </ul>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <h5>III - TO DO NEXT</h5>
+      <div>
+        <p style="margin-left: 10px">
+          Continue <span style="font-weight: bold"> &nbsp;TBD</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

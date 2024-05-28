@@ -6,6 +6,8 @@ export const environment = {
   production: false,
   CONNECTION_URL:
     'https://sheet.best/api/sheets/ef9b3c4c-0c12-499f-bc2f-5c24907dec08',
+  CONNECTION_URL_SRI:
+    'https://sheet.best/api/sheets/0765da6a-4dbd-4bb6-82f1-b6a7721505fd',
 };
 
 /*

@@ -16,6 +16,7 @@ import { UserService } from './Services/user.service';
 import {ShowComponent} from "./Pages/reports/show/show.component";
 import {GenerateReportComponent} from "./Pages/reports/generate-report/generate-report.component";
 import { IpSearchComponent } from './Pages/ip-search/ip-search.component';
+import { GenerateReportSriComponent } from './Pages/reports/generate-report-sri/generate-report-sri.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { IpSearchComponent } from './Pages/ip-search/ip-search.component';
     ShowComponent,
     GenerateReportComponent,
     IpSearchComponent,
+    GenerateReportSriComponent,
   ],
   imports: [
     BrowserModule,

@@ -11,4 +11,8 @@ export class SheetService {
   listSheet() {
     return this.http.get(`${environment.CONNECTION_URL}`);
   }
+
+  listSheetSri() {
+    return this.http.get(`${environment.CONNECTION_URL_SRI}`);
+  }
 }

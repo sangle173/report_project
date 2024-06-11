@@ -155,6 +155,29 @@ export class GenerateReportComponent {
       }
     },
     {
+      "name": "8 - Pro-Infrastructure",
+      "display": "Pro-Infrastructure",
+      "color": "#EBF1DE",
+      "testing_request_done": {
+        "name": "Testing request",
+        "status": "Done",
+        "data": [],
+        "no": 0
+      },
+      "testing_request_inprogress": {
+        "name": "Testing request",
+        "status": "In-progress",
+        "data": [],
+        "no": 0
+      },
+      "bug_found": {
+        "name": "Bug found",
+        "status": "Open",
+        "data": [],
+        "no": 0
+      }
+    },
+    {
       "name": "9 - Pinewood",
       "display": "Pinewood",
       "color": "#F4B083",
@@ -180,7 +203,7 @@ export class GenerateReportComponent {
   ]
   date: any;
   days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  cc = "huy.quoc.tran@agest.vn; vien.do@agest.vn; tonyl@logigear.com; doug.wilson@logigear.com; canh.tran@agest.vn; tuong.vo@agest.vn; nhi.thuc.nguyen@agest.vn; tai.ngo@agest.vn; tai.le@agest.vn; duy.khuong.phan@agest.vn; thanh.dang@agest.vn; sang.le@agest.vn; vuong.bui@agest.vn; nhan.thi.tran@agest.vn; hung.ngo@agest.vn; hieu.ngoc.dang@agest.vn"
+  cc = "huy.quoc.tran@agest.vn; vien.do@agest.vn; tonyl@logigear.com; doug.wilson@logigear.com; canh.tran@agest.vn; tuong.vo@agest.vn; nhi.thuc.nguyen@agest.vn; tai.ngo@agest.vn; tai.le@agest.vn; duy.khuong.phan@agest.vn; thanh.dang@agest.vn; sang.le@agest.vn; vuong.bui@agest.vn; nhan.thi.tran@agest.vn; hung.ngo@agest.vn; hieu.ngoc.dang@agest.vn; hieu.ngoc.dang@agest.vn;thao.phuong.do@agest.vn;"
 
   constructor(private reportService: ReportService, private service: SheetService) {
   }
@@ -199,12 +222,11 @@ export class GenerateReportComponent {
     this.service.listSheet().subscribe((data: any) => {
       this.reports = data;
       for (let i = 0; i <data.length ; i++) {
-        if(data[i][0] !== undefined) {
-          this.reports[i]['date'] = data[i][0];
-        } else {
-          this.reports[i]['date'] = data[i]['                 '];
-        }
-        this.reports[i]['team'] = data[i][1];
+	  Object.values(data[i]).forEach(value => {
+	    if(value !== null && value !== undefined && typeof value=== 'string' && value === today){
+  	    console.log(value);
+	      this.reports[i]['date'] = value;
+	      this.reports[i]['team'] = data[i][1];
         this.reports[i]['action'] = data[i][2];
         this.reports[i]['jira_id'] = data[i][3];
         this.reports[i]['jira_summary'] = data[i][4];
@@ -214,6 +236,8 @@ export class GenerateReportComponent {
         this.reports[i]['tester_2'] = data[i][8];
         this.reports[i]['tester_3'] = data[i][9];
         this.reports[i]['jira_id_summary'] = data[i][10];
+	    }
+	  })
       }
       console.log(this.reports);
       for (let i = 0; i <this.dataList.length ; i++) {

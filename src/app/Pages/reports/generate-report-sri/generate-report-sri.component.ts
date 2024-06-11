@@ -25,7 +25,7 @@ export class GenerateReportSriComponent {
   ngOnInit(): void {
     this.getReports();
     this.date = new Date();
-    this.subject = "[SONOS] - Daily Status Report – " + formatDate(this.date, 'M/dd/yyyy', "en-US");
+    this.subject = "[SONOS] - Daily Status Report – " + this.days[this.date.getDay()] + ", " + formatDate(this.date, 'MMMM dd yyyy', "en-US");
     console.log(this.subject);
   }
 

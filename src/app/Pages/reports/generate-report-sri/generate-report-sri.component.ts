@@ -76,7 +76,6 @@ export class GenerateReportSriComponent {
       }
       console.log(this.reports);
       this.reportDataToday = jp.query(this.reports, `$[?(@.start_date== "${today}" )]`);
-      // let arr = this.reportDataToday[0]['email_sonos_id'].split('\n');
       console.log(this.reportDataToday);
       this.isLoading = false;
     });
